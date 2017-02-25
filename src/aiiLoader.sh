@@ -5,8 +5,7 @@
 # Introduction:
 #     - AppleIntelInfo Loader is a simple automated bash script that
 #       loads Piker-Alpha's AppleIntelInfo.kext without any user input.
-#     - Simply unzip the aiiLoader file to your Desktop and
-#        double click to execute the script!
+#     - Simply unzip the aiiLoader.command file and double click!
 #
 #
 # Bugs:
@@ -96,7 +95,6 @@ function checkFileExist() {
     endScript
   else
     echo "This script must be temporarily run as root!"
-    echo ''
     main
   fi
 }
