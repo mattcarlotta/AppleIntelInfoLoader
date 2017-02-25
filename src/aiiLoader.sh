@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# AppleIntelInfo Loader Version 0.0.1 - Copyright (c) 2017 by M.F.C.
+# AppleIntelInfo Loader Version 0.0.2 - Copyright (c) 2017 by M.F.C.
 #
 # Introduction:
 #     - AppleIntelInfo Loader is a simple automated bash script that
@@ -19,19 +19,20 @@
 ##==============================================================================##
 gFile="AppleIntelInfo.kext"
 
+
 #===============================================================================##
 ## END SCRIPT #
 ##==============================================================================##
 function endScript() {
   exit=$1
-  Sleep 2
+
   echo ''
   echo 'Terminating the script...'
-  Sleep 1.5
+  sleep 1.5
   if [[ $exit -eq 0 ]];
     then
     #
-    # exit script without terminating window
+    # exit script by terminating window
     #
     killall Terminal
     else
@@ -39,7 +40,7 @@ function endScript() {
     # unload kext and exit script
     #
     echo ''
-    sudo kextunload ${gFile}
+    sudo kextunload -b com.pikeralpha.driver.AppleIntelInfo
     exit 0;
   fi
 }
@@ -79,6 +80,11 @@ function main(){
   sudo chown -R 0:0 ${gFile}
   sudo chmod -R 755 ${gFile}
   sudo kextload ${gFile}
+  echo ''
+  echo '----------------------------------------------------'
+  echo "Status: Populating the CPU states 10 times..."
+  echo '----------------------------------------------------'
+  sleep 3
   populateStates
   endScript 1
 }
@@ -88,6 +94,7 @@ function main(){
 ##==============================================================================##
 function checkFileExist() {
   cd ~/Desktop
+
   if [ ! -e ${gFile} ];
   then
     echo "${gFile} not found!"
