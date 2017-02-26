@@ -110,7 +110,7 @@ function checkFileExist() {
 ## GREET USER #
 ##==============================================================================##
 function greet(){
-  echo '     AppleIntelInfo Loader Version 0.0.1 - Copyright (c) 2017 by M.F.C.'
+  echo '     AppleIntelInfo Loader Version 0.0.2 - Copyright (c) 2017 by M.F.C.'
   echo '--------------------------------------------------------------------------------'
   echo ''
   sleep 0.5
