@@ -19,7 +19,10 @@ Then, you must change the file permissions to make it executable:
 chmod +x ~/Desktop/aiiLoader.command
 ```
 
-Simply double click the aiiLoader.command file to load the script.
+Simply double click the aiiLoader.command file to load the script or you can use this command:
+``` sh
+~/Desktop/aiiLoader.command
+```
 
 --------------------------------------------------------------------------------------------------------------
 **Note: If at any point you wish to abort the script, simple press "ctrl+c"!
