@@ -104,7 +104,7 @@ function _find_kext()
                   mv ./build/Release/AppleIntelInfo.kext $HOME/Desktop
                   gKext="$dkpKext"
                 else
-                  printf "ERROR! Compiling the ${gAii} failed, aborting...\n"
+                  printf "ERROR! Compiling the ${gAii} has failed, aborting...\n"
                   exit 1
               fi
           fi

@@ -25,6 +25,6 @@ Simply double click the aiiLoader.command file to load the script or you can use
 ```
 
 --------------------------------------------------------------------------------------------------------------
-**Note: If at any point you wish to abort the script, simple press "ctrl+c"!
+**Note: If at any point you wish to abort the script, simply press "ctrl+c"!
 
 **Special Note: Huge thanks to PMheart for refactoring my entire script and making it more flexible!
