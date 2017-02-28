@@ -9,9 +9,9 @@ You can download the latest version of AppleIntelInfo Loader to your Desktop by 
 curl -o ~/Desktop/aiiLoader.command https://raw.githubusercontent.com/mattcarlotta/AppleIntelInfoLoader/master/aiiLoader.command
 ```
 
-You can then verify the downloaded size (should be 6008 Bytes):
+You can then verify the downloaded size (should be 6015 Bytes):
 ``` sh
-wc -c aiiLoader.command
+wc -c ~/Desktop/aiiLoader.command
 ```
 
 Then, you must change the file permissions to make it executable:
