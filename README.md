@@ -1,4 +1,4 @@
-#AppleIntelInfoLoader v1.0.0
+#AppleIntelInfoLoader v1.1.0
 
 Introduction
 
@@ -26,4 +26,5 @@ Simply double click the aiiLoader.command file to load the script or you can use
 
 --------------------------------------------------------------------------------------------------------------
 **Note: If at any point you wish to abort the script, simple press "ctrl+c"!
+
 **Special Note: Huge thanks to PMHeart for refactoring my entire script and making it more flexible!
