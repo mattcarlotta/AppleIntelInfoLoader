@@ -104,7 +104,7 @@ function _find_kext()
                   mv ./build/Release/AppleIntelInfo.kext $HOME/Desktop
                   gKext="$dkpKext"
                 else
-                  printf "ERROR! Compiling the ${gAii} has failed, aborting...\n"
+                  printf "ERROR! Compiling the ${gAii}, aborting...\n"
                   exit 1
               fi
           fi
@@ -184,7 +184,7 @@ function _printResult()
       echo '----------------------------------------------------'
       exit 0
     else
-      printf 'ERROR! Unable to populate AppleIntelInfo/s results, aborting...\n'
+      printf 'ERROR! Unable to gather AppleIntelInfo/s results, aborting...\n'
       exit 1
   fi
 }
