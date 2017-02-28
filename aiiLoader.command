@@ -1,13 +1,13 @@
 #!/bin/bash
 #
-# AppleIntelInfo Loader Version 1.0. - Copyright (c) 2017 by M.F.C. and PMHeart
+# AppleIntelInfo Loader Version 1.1.0 - Copyright (c) 2017 by M.F.C. and PMheart
 #
 #
 #
 # Introduction:
 #     - AppleIntelInfo Loader is a simple automated bash script that
 #       loads Piker-Alpha's AppleIntelInfo.kext without any user input.
-#     - Simply double click the aiiLoader.command file to load the script! 
+#     - Simply double click the aiiLoader.command file to load the script!
 #
 #
 # Bugs:
@@ -23,34 +23,34 @@
 ## GLOBAL VARIABLES #
 ##==============================================================================##
 
-
+# User's current directory
 gRepo="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-#
 # Kext path, will be overrided by _find_kext()
-#
 gKext=""
 
+# Kext name
 gAii="AppleIntelInfo.kext"
 
+# AII.kext Repo
 gPikerAII="https://github.com/Piker-Alpha/AppleIntelInfo"
 
 
 #===============================================================================##
 ## CHECK SIP #
 ##==============================================================================##
-
-
 function _getSIPStat()
 {
   case "$(/usr/bin/csrutil status)" in
     "System Integrity Protection status: enabled." )
-      printf 'SIP enabled, aborting...\n'
+      printf 'ERROR! S.I.P is enabled, aborting...\n'
+      printf 'Please disable S.I.P. by setting CsrActiveConfig to 0x67 in your config.plist!\n'
       exit 1
       ;;
 
     *"Kext Signing: enabled"* )
-      printf 'SIP Kext Restriction enabled, aborting...\n'
+      printf 'ERROR! S.I.P. is partially disabled, but kext signing is still enabled, aborting...\n'
+      printf 'Please completely disable S.I.P. by setting CsrActiveConfig to 0x67 in your config.plist!\n'
       exit 1
       ;;
 
@@ -63,8 +63,6 @@ function _getSIPStat()
 #===============================================================================##
 ## COMPILE KEXT #
 ##==============================================================================##
-
-
 function _find_kext()
 {
   local dkpKext="$HOME/Desktop/${gAii}"
@@ -75,13 +73,13 @@ function _find_kext()
   # If still not found,
   # then we need to download and then compile it.
   #
+  printf "Searching for ${gAii} in ${gRepo}...\n"
   if [[ ! -e "${gRepo}/${gAii}" ]];
     then
-      printf "${gAii} could not be located!\n"
+      printf "${gAii} was not found in the current directory!\n"
       printf " \n"
-      printf "Searching for ${gAii} in $HOME/Desktop...\n"
-      sleep 1
-      if [[ -e "${dkpKext}" ]];
+      printf "Searching for ${gAii} in $HOME/Desktop instead...\n"
+        if [[ -e "${dkpKext}" ]];
         then
           printf "${gAii} was found!\n"
           printf " \n"
@@ -95,7 +93,8 @@ function _find_kext()
           git clone "${gPikerAII}"
           if [[ $? -ne 0 ]];
             then
-              printf 'An error occurred! Make sure your network connection is active and/or if you have installed Xcode properly!\n'
+              printf ' \n'
+              printf 'ERROR! Make sure your network connection is active and/or make sure you have already installed Xcode from the App store!\n'
               exit 1
             else
               cd AppleIntelInfo
@@ -105,7 +104,7 @@ function _find_kext()
                   mv ./build/Release/AppleIntelInfo.kext $HOME/Desktop
                   gKext="$dkpKext"
                 else
-                  printf 'Uh-oh! Compilation failed!!!\n'
+                  printf "ERROR! Compiling the ${gAii} failed, aborting...\n"
                   exit 1
               fi
           fi
@@ -119,7 +118,6 @@ function _find_kext()
 #===============================================================================##
 ## SET PERMISSIONS #
 ##==============================================================================##
-
 function _set_perm()
 {
   chown -R 0:0 "${gKext}"
@@ -130,17 +128,16 @@ function _set_perm()
 #===============================================================================##
 ## USER ABORTS SCRIPT #
 ##==============================================================================##
-
 function _clean_up() {
   printf "User aborted! Cleaning up script...\033[0K\r\n"
   sudo kextunload "${gKext}"
   clear
 }
 
+
 #===============================================================================##
 ## TIMOUT KEXT AND OUTPUT #
 ##==============================================================================##
-
 function showTimer()
 {
   secs=$((3 * 60))
@@ -151,10 +148,10 @@ function showTimer()
   done
 }
 
+
 #===============================================================================##
 ## LOAD AND UNLOAD KEXT #
 ##==============================================================================##
-
 function LoadAndUnload()
 {
   sudo kextload "${gKext}"
@@ -167,7 +164,7 @@ function LoadAndUnload()
       clear
       kextunload "${gKext}"
     else
-      printf "ERROR loading ${gKext} !!!\n"
+      printf "ERROR loading ${gKext}, aborting...\n"
       exit 1
   fi
 }
@@ -176,8 +173,6 @@ function LoadAndUnload()
 #===============================================================================##
 ## PRINT RESULT #
 ##==============================================================================##
-
-
 function _printResult()
 {
   if [ -f /tmp/AppleIntelInfo.dat ];
@@ -189,17 +184,18 @@ function _printResult()
       echo '----------------------------------------------------'
       exit 0
     else
-      printf 'ERROR populating AppleIntelInfo/s results, aborting...\n'
+      printf 'ERROR! Unable to populate AppleIntelInfo/s results, aborting...\n'
       exit 1
   fi
 }
+
 
 #===============================================================================##
 ## GREET USER #
 ##==============================================================================##
 function greet(){
-  echo '     AppleIntelInfo Loader Version 1.0.0 - Copyright (c) 2017 by M.F.C. and PMHeart'
-  echo '------------------------------------------------------------------------------------------'
+  echo ' AppleIntelInfo Loader Version 1.1.0 - Copyright (c) 2017 by M.F.C. and PMheart'
+  echo '--------------------------------------------------------------------------------'
   echo ''
   sleep 0.5
 }
@@ -208,8 +204,6 @@ function greet(){
 #===============================================================================##
 ## START #
 ##==============================================================================##
-
-
 function main()
 {
   clear
@@ -230,3 +224,8 @@ if [[ `id -u` -ne 0 ]];
   else
     main
 fi
+
+
+#===============================================================================##
+## EOF #
+##==============================================================================##
