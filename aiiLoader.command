@@ -66,24 +66,10 @@ function _getSIPStat()
 function _find_kext()
 {
   local dkpKext="$HOME/Desktop/${gAii}"
-<<<<<<< HEAD
   printf "Searching for ${gAii} in ${gRepo}...\n"
   if [[ ! -e "${gRepo}/${gAii}" ]];
     then
       printf "${gAii} wasn't found in the current directory!\n"
-=======
-
-  #
-  # If the kext cannot be found at current dir,
-  # then we shall search at Desktop.
-  # If still not found,
-  # then we need to download and then compile it.
-  #
-  printf "Searching for ${gAii} in ${gRepo}...\n"
-  if [[ ! -e "${gRepo}/${gAii}" ]];
-    then
-      printf "${gAii} was not found in the current directory!\n"
->>>>>>> c5a00465541aa723b39353ec3b44ba3f3734dfd8
       printf " \n"
       printf "Searching for ${gAii} in $HOME/Desktop instead...\n"
         if [[ -e "${dkpKext}" ]];
@@ -111,11 +97,7 @@ function _find_kext()
                   mv ./build/Release/AppleIntelInfo.kext $HOME/Desktop
                   gKext="$dkpKext"
                 else
-<<<<<<< HEAD
                   printf "ERROR! Unable to compile the ${gAii}, aborting...\n"
-=======
-                  printf "ERROR! Compiling the ${gAii}, aborting...\n"
->>>>>>> c5a00465541aa723b39353ec3b44ba3f3734dfd8
                   exit 1
               fi
           fi
@@ -175,11 +157,7 @@ function LoadAndUnload()
       clear
       kextunload "${gKext}"
     else
-<<<<<<< HEAD
       printf "ERROR! Unable to load ${gKext}, aborting...\n"
-=======
-      printf "ERROR loading ${gKext}, aborting...\n"
->>>>>>> c5a00465541aa723b39353ec3b44ba3f3734dfd8
       exit 1
   fi
 }
