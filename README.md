@@ -1,4 +1,4 @@
-#AppleIntelInfoLoader v1.1.0
+# AppleIntelInfoLoader v1.1.0
 
 Introduction
 
